@@ -1,0 +1,181 @@
+{% load static %}
+{% block title %} Edit Employee {% endblock %}
+
+{% block heading %} EDIT EMPLOYEE DETAILS {% endblock %}
+
+{% block content %}
+
+<form action="/employee/{{obj_emp.employee_name}}/edit/" method="post" autocomplete="off">
+    {% csrf_token %}
+
+        <div class="form-group row">
+
+            <div class="col-md-2 mb-2">
+                <span class="input-text">Employee Name</span>
+                <input class="form-control"  name="employee_name" value="{{ obj_emp.employee_name }}"/>
+            </div>
+            <div class="col-md-4 mb-2">
+                <span class="input-text">Department</span>
+                <input class="form-control"  name="email" value="{{ obj_emp.department }}"/>
+            </div>
+            <div class="col-md-4 mb-2">
+                <span class="input-text">Email</span>
+                <input class="form-control"  name="email" value="{{ obj_emp.email }}"/>
+            </div>
+            <div class="col-md-2 mb-2">
+                <span class="input-text">Line Supervisor</span>
+                <input class="form-control"  name="line_supervisor" value="{{ obj_emp.line_supervisor }}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Date of Leave</span>
+                <div class="form-group">
+                <div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" data-date-format="yyyy-mm-dd" name="date_of_leave" value="{{ obj_emp.date_of_leave|date:'Y-m-d' }}"/>
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div></div></div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <span class="input-text">From</span>
+                <div class="form-group">
+                <div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" data-date-format="yyyy-mm-dd"  name="leave_from" value="{{ obj_emp.leave_from|date:'Y-m-d' }}"/>
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div></div></div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <span class="input-text">To</span>
+                <div class="form-group">
+                <div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" data-date-format="yyyy-mm-dd"  name="leave_to" value="{{ obj_emp.leave_to|date:'Y-m-d' }}"/>
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div></div></div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Return Date</span>
+                <div class="form-group">
+                <div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" data-date-format="yyyy-mm-dd"  name="return_date" value="{{ obj_emp.return_date|date:'Y-m-d' }}"/>
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div></div></div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Total Number of Leave Days</span>
+                <div class="form-control-plaintext">{{ form.leave_days }}</div>
+             </div>
+                   
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">User Type</span>
+                <select class="form-control" name="user_type" id="user_type">
+                    <option id="user_type_0" value="{{ obj_emp.user_type }}">{{ obj_emp.user_type }}</option>
+                    {% for ut in obj_User_Type %}
+                    {% if ut.user_type == obj_emp.user_type %}
+                    {% else %}
+                    <option id="{{ ut.user_type }}" value="{{ut.user_type}}">{{ ut.user_type }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Type of Leave</span>
+                <select class="form-control" name="type_of_leave" >
+                    <option id="type_of_leave_0" value="{{ obj_emp.type_of_leave }}">{{ obj_emp.type_of_leave }}</option>
+                    {% for tl in obj_Type_Of_Leave %}
+                    {% if tl.type_of_leave == obj_emp.type_of_leave %}
+                    {% else %}
+                    <option id="{{ tl.type_of_leave }}" value="{{tl.type_of_leave}}">{{ tl.type_of_leave }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2 mb-2">
+                <span class="input-text">Employee Status</span>
+                    <select class="form-control" id="employee_status" name="employee_status">
+                    <option name="employee_status_0">{{ obj_emp.employee_status }}</option>
+                     {% for es in obj_Emp_Status %}
+                     {% if es.employee_status == obj_emp.employee_status %}
+                     {% else %}
+                      <option name="{{ es.employee_status }}">{{ es.employee_status }}</option>
+                     {% endif %}
+                     {% endfor %}
+                    </select>
+
+            </div>
+            <div class="col-md-2 mb-2">
+                <span class="input-text">Remaining Leave Days</span>
+                <input class="form-control"  name="no_of_days" value="{{ obj_emp.no_of_days }}"/>
+            </div>
+        </div>
+
+
+         <div class="form-group row">
+            <div class="col-md-3 mb-2">
+                <button class="btn btn-primary btn-lg" type="submit">Update</button>
+                <a href="{% url 'employee_list' %}" role="button" class="btn btn-primary btn-lg">Back</a>
+            </div>
+            <div class="col-md-9 mb-2">
+                <h2 align="left"><span class="badge" style="color:Green">{{ save_message }}</span></h2>
+            </div>
+         </div>
+        <!-- Error Handling -->
+                    {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                    <strong>{{ form.errors|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+        <!-- /Error Handling -->
+
+</form>
+
+<script>
+     $("#date_of_leave").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true, todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+    $("#date_from").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true, todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+    $("#date_to").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true, todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+    $("#return_date").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true, todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+</script>
+
+{% endblock %}

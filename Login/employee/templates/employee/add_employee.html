@@ -1,0 +1,126 @@
+{% load static %}
+{% block title %} Add Employee {% endblock %}
+
+{% block heading %} ADD EMPLOYEE {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'add_employee' %}" method="post" autocomplete="off">
+    {% csrf_token %}
+
+    <h2><span class="badge" style="color:Green">{{ save_message }}</span></h2>
+            
+
+            {% if save_message %}
+            <a href="{% url 'add_employee' %}" role="button" class="btn btn-primary btn-lg">Close</a>
+            {% else %}
+            <button class="btn btn-primary btn-lg" type="submit">Save</button>
+            {% endif %}
+
+            <div class="form-group row">
+                <div class="col-md-12 mb-2">
+                <!--Error Handling--> 
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                <strong>{{ form.errors|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+                 <!--/Error Handling-->
+            </div>
+            
+
+</form>
+
+<div class="form-group row">
+
+	<div class="col-md-2 mb-2">
+	            <span class="input-text">Employee Name</span>
+	            <div class="form-control-plaintext">{{ form.employee_name }}</div>
+	</div>
+	<div class="col-md-4 mb-2">
+	            <span class="input-text">Department</span>
+	            <div class="form-control-plaintext">{{ form.department }}</div>
+	</div>
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">Email</span>
+	            <div class="form-control-plaintext">{{ form.email }}</div>
+	</div>
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">Line Supervisor</span>
+	            <div class="form-control-plaintext">{{ form.line_supervisor }}</div>
+	</div>
+</div>
+
+<div class="form-group row">
+
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">Date Of Leave</span>
+	            <div class="form-control-plaintext">{{ form.date_of_leave }}</div>
+	</div>
+	<div class="col-md-2 mb-2">
+	            <span class="input-text">From</span>
+	            <div class="form-control-plaintext">{{ form.leave_from }}</div>
+	</div>
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">To</span>
+	             <div class="form-control-plaintext">{{ form.leave_to }}</div>
+	</div>
+	<div class="col-md-4 mb-2">
+	            <span class="input-text">Return Date</span>
+	            <div class="form-control-plaintext">{{ form.return_date }}</div>
+	</div>
+</div>
+
+<div class="form-group row">
+
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">Total Number of Leave Days</span>
+	            <div class="form-control-plaintext">{{ form.leave_days }}</div>
+	</div>
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">User Type</span>
+	            <div class="form-control-plaintext">{{ form.user_type }}</div>
+	</div>
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">Type of Leave</span>
+	            <div class="form-control-plaintext">{{ form.type_of_leave }}</div>
+	</div>
+	<div class="col-md-3 mb-2">
+	            <span class="input-text">Employee Status</span>
+	            <div class="form-control-plaintext">{{ form.employee_status }}</div>
+	</div>
+</div>
+
+<button class="btn btn-primary btn-lg" type="submit">Save</button>
+
+<script>
+    $("#date_of_leave").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true,todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+    $("#leave_from").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true,todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+    $("#leave_to").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true,todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+    $("#return_date").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true, showButtonPanel:true,todayHighlight: true, autoclose: true, todayBtn: true,
+        onClose: function () {
+       }
+    });
+</script>
+
+
+
+{% endblock %}

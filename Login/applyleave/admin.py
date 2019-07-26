@@ -1,0 +1,23 @@
+from django.contrib import admin
+from .models import *
+# Register your models here.
+admin.site.register(LeaveApplication)
+admin.site.register(EmployeeName)
+admin.site.register(Email)
+admin.site.register(Department)
+admin.site.register(LeaveMonth)
+admin.site.register(LeaveApplicationDetails)
+admin.site.register(LeaveRegister)
+admin.site.register(LineSupervisor)
+admin.site.register(TypeOfLeave)
+admin.site.register(LeaveDays)
+admin.site.register(OtherReason)
+admin.site.register(FinancialYear)
+admin.site.register(DateOfLeave)
+admin.site.register(LeaveFrom)
+admin.site.register(LeaveTo)
+admin.site.register(ReturnDate)
+admin.site.register(NumberOfDays)
+admin.site.register(LineSupervisorEmail)
+admin.site.register(LeaveStatus)
+admin.site.register(Remarks)

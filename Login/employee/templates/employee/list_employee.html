@@ -1,0 +1,89 @@
+{% load static %}
+{% block title %} List of Employee {% endblock %}
+
+{% block heading %} LIST OF EMPLOYEES {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'employee_list' %}" method="post">
+    {% csrf_token %}
+        <!--<div class="card-header">-->
+            <!--<h4 style="color:Blue">LIST OF EMPLOYEES</h4>-->
+            <!--<hr style="border-color:Blue">-->
+
+            <div class="alert alert-primary">
+            <div class="form-row">
+                <div class="input-group col-md-12 md-2">
+                    <div class="col-md-1 mb-1">
+                        <strong>Employee Name</strong>
+                    </div>
+                    <div class="col-md-3 mb-1">
+                        <strong>Department</strong>
+                    </div>
+                    <div class="col-md-2 mb-1">
+                        <strong>Date of Leave</strong>
+                    </div>
+                    <div class="col-md-2 mb-1">
+                        <strong>Return Date</strong>
+                    </div>
+                    <div class="col-md-2 mb-1">
+                        <strong>Line Supervisor</strong>
+                    </div>
+                    <div class="col-md-2 mb-1" >
+                        <strong>Remaining Leave Days</strong>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            <!-- Below loop for populate list of employee from Employee Details model -->
+            {% for emp in obj_emp %}
+    <div class="shadow-sm p-0 mb-3 bg-white rounded">
+            <div class="alert alert-primary">
+                <div class="form-row">
+                <div class="input-group col-md-12 mb-2">
+                    <div class="col-md-1 mb-2">
+                       {{ emp.employee_name }}
+                    </div>
+                    <div class="col-md-3 mb-2">
+                       {{ emp.department }}
+                    </div>
+                    <div class="col-md-2 mb-2">
+                       {{ emp.date_of_leave }}
+                    </div>
+                    <div class="col-md-2 mb-2">
+                       {{ emp.return_date }}
+                    </div>
+                    <div class="col-md-2 mb-2">
+                       {{ emp.no_of_days }}
+                    </div>
+                    <div class="col-md-2 mb-2" align="right">
+                        <div class="btn-group" role="group">
+                            <a href="/employee/{{emp.employee_name}}/details/" role="button" class="btn btn-primary btn-sm">VIEW</a>
+                            <a href="/employee/{{emp.employee_name}}/edit/" role="button" class="btn btn-warning btn-sm">EDIT</a>
+                            <a href="/employee/{{emp.employee_name}}/delete/" role="button" class="btn btn-danger btn-sm">DELETE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<hr style="border-color:White">-->
+            </div>
+    </div>
+            {% endfor %}
+
+</form>
+
+<script>
+    $("#date_of_leave").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true,
+        onClose: function () {
+       }
+    });
+    $("#return_date").datepicker({"dateFormat": "yy-mm-dd", changeMonth:true, changeYear:true,
+        onClose: function () {
+       }
+    });
+</script>
+
+
+
+{% endblock %}

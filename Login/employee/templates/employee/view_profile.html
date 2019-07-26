@@ -1,0 +1,74 @@
+{% load static %}
+{% block title %} Profile {% endblock %}
+
+{% block heading %} PROFILE {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'profile_view' %}" method="post">
+    {% csrf_token %}
+        <div class="form-group row">
+
+            <div class="col-md-2 mb-2">
+                <span class="input-text">Employee Name</span>
+                <div class="form-control">{{ obj_emp.employee_name }}</div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <span class="input-text">Department</span>
+                <div class="form-control">{{ obj_emp.department }}</div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <span class="input-text">Email</span>
+                <div class="form-control">{{ obj_emp.emai }}</div>
+            </div>
+            <div class="col-md-2 mb-2">
+                <span class="input-text">Line Supervisor</span>
+                <div class="form-control">{{ obj_emp.line_supervisor }}</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-md-4 mb-2">
+                <span class="input-text">Date of Leave</span>
+                <div class="form-control">{{ obj_emp.date_of_leave}}</div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">From</span>
+                <div class="form-control">{{ obj_emp.leave_from }}</div>
+            </div>
+            <div class="col-md-2 mb-2">
+                <span class="input-text">To</span>
+                <div class="form-control">{{ obj_emp.leave_to }}</div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Return Date</span>
+                <div class="form-control">{{ obj_emp.ereturn_date }}</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Remaining Leave Days</span>
+                <div class="form-control">{{ obj_emp.no_of_days }}</div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Type of Leave</span>
+                <div class="form-control">{{ obj_emp.type_of_leave }}</div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">User Type</span>
+                <div class="form-control">{{ obj_emp.user_type }}</div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <span class="input-text">Employee Status</span>
+                <div class="form-control">{{ obj_emp.employee_status }}</div>
+            </div>
+        </div>
+
+        
+        <a href="" role="button" class="btn btn-primary btn-lg">Close</a>
+
+</form>
+{% endblock %}
